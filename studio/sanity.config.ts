@@ -7,7 +7,7 @@ export default defineConfig({
   name: 'default',
   title: 'livwell',
 
-  projectId: 'sl5ctf5p',
+  projectId: '83v7fb7k',
   dataset: 'production',
 
   plugins: [structureTool(), visionTool()],
