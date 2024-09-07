@@ -1,0 +1,56 @@
+import styled from "styled-components";
+
+const Section = styled.section`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+`
+
+const Decal = styled.img`
+  grid-column: 1 / span 2;
+  width: 60%;
+  margin: auto;
+`
+const Logo = styled.img`
+  width: 90%;
+  height: auto;
+  margin: auto;
+  grid-row: 2;
+  grid-column: 1 / span 3;
+`
+
+const LinkListContainer = styled.div`
+  margin-top: auto;
+`
+const LinkList = styled.div`
+  display: flex;
+  flex-direction: column;
+  a {
+    padding: 0;
+    border: none;
+  }
+`
+
+const Footer = () => {
+  return (
+    <Section>
+      <Decal src="/images/lavender.png" alt="lav" />
+      <LinkListContainer>
+        <LinkList>
+          <a>About</a>
+          <a>Services</a>
+          <a>Events</a>
+          <a>Contact</a>
+        </LinkList>
+        <br />
+        <LinkList>
+          <a>+44 78 0516 6798</a>
+          <a>livwelllondon@gmail.com</a>
+        </LinkList>
+      </LinkListContainer>
+      <Logo src="/images/logo.svg" alt="logo" />
+    </Section>
+  );
+}
+ 
+export default Footer;
