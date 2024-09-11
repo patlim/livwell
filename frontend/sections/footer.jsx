@@ -1,9 +1,10 @@
 import styled from "styled-components";
 
-const Section = styled.section`
+const FooterContainer = styled.div`
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  margin: 64px;
 `
 
 const Decal = styled.img`
@@ -26,6 +27,7 @@ const LinkList = styled.div`
   display: flex;
   flex-direction: column;
   a {
+    color: inherit;
     padding: 0;
     border: none;
   }
@@ -33,7 +35,7 @@ const LinkList = styled.div`
 
 const Footer = () => {
   return (
-    <Section>
+    <FooterContainer>
       <Decal src="/images/lavender.png" alt="lav" />
       <LinkListContainer>
         <LinkList>
@@ -49,7 +51,7 @@ const Footer = () => {
         </LinkList>
       </LinkListContainer>
       <Logo src="/images/logo.svg" alt="logo" />
-    </Section>
+    </FooterContainer>
   );
 }
  

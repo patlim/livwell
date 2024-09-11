@@ -27,8 +27,10 @@ const BgImage = styled.img`
 const Cta = () => {
   return (
     <Section>
-      <h2>Begin your<br/>journey</h2>
-      <a>Discover now</a>
+      <div data-scroll-fade>
+        <h2>Get in touch</h2>
+        <a><h5>Contact</h5></a>
+      </div>
       <BgImage
         src="/images/leaf.png"
         alt="background"

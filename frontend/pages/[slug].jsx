@@ -1,5 +1,6 @@
 import groq from 'groq';
 import client from '../client';
+import HomeSection from '../sections/homeSection';
 import TitleSection from '../sections/titleSection';
 import TextSection from '../sections/textSection';
 import Cta from '../sections/cta';
@@ -11,11 +12,13 @@ const Page = ({ page }) => {
     return <div>Loading...</div>;
   }
   const { title, pageBuilder } = page;
-  console.log(pageBuilder);
   return (
     <div>
       <article>
-        <TitleSection heading={title}/>
+        { title === "LIVWELL"
+            ? <HomeSection />
+            : <TitleSection heading={title}/>
+        }
         {pageBuilder && pageBuilder.map((block, index) => {
           if (block._type === 'textSection') {
             return (

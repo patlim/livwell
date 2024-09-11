@@ -1,6 +1,9 @@
+@import url('./scroll-fade.css');
+
 :root {
   --background: #374220;
   --foreground: #CABB94;
+  --accent: #EABB4D;
 }
 
 html,
@@ -46,20 +49,20 @@ h4 {
 
 h5 {
   font-family: var(--font-montserrat);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: normal;
 }
 
 p, a, button {
   font-family: var(--font-montserrat);
-  font-size: 16px;
+  font-size: 18px;
 }
 
 a {
-  color: inherit;
+  color: var(--accent);
   text-decoration: none;
   padding-bottom: 6px;
-  border-bottom: 1px solid var(--foreground);
+  border-bottom: 1px solid var(--accent);
 }
 
 button {
@@ -79,5 +82,5 @@ button:hover {
 }
 
 section {
-  margin: 24px 0;
+  margin: 64px auto;
 }
