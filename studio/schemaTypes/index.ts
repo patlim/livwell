@@ -3,6 +3,8 @@ import page from './page'
 import heroSection from './heroSection'
 import textSection from './textSection'
 import practitionerSection from './practitionerSection'
+import event from './event'
+import eventsSection from './eventsSection'
 
 export const schemaTypes = [
   blockContent,
@@ -10,4 +12,6 @@ export const schemaTypes = [
   heroSection,
   textSection,
   practitionerSection,
+  event,
+  eventsSection,
 ]
