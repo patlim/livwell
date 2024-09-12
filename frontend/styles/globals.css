@@ -61,8 +61,6 @@ p, a, button {
 a {
   color: var(--accent);
   text-decoration: none;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--accent);
 }
 
 button {
@@ -83,4 +81,26 @@ button:hover {
 
 section {
   margin: 64px auto;
+  padding: 0 24px;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 64px;
+  }
+  h2 {
+    font-size: 48px;
+  }
+  h3 {
+    font-size: 32px;
+  }
+  h4 {
+    font-size: 24px;
+  }
+  h5 {
+    font-size: 18px;
+  }
+  section {
+    margin: 40px auto;
+  }
 }

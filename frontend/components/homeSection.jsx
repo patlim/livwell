@@ -4,19 +4,46 @@ import styled from 'styled-components';
 const Section = styled.section`
   display: flex;
   flex-direction: column;
+  align-items: center;
 `;
 
-const Heading = styled.h1`
-  text-align: center;
-  margin-top: -86px;
-`;
+const Logo = styled.img`
+  width: 100%;
+  max-width: 1000px;
+`
+
+const SubHeadingContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  width: 100%;
+  max-width: 960px;
+  margin: 24px auto;
+  h2 {
+    font-family: var(--font-montserrat);
+    font-weight: normal;
+    font-size: 40px;
+    &:nth-child(2) {
+      text-align: center;
+    }
+    &:last-child {
+      text-align: end;
+    }
+    @media (max-width: 768px) {
+      font-size: 20px;
+    }
+  }
+`
 
 const SunContainer = styled.div`
   position: relative;
-  height: 65vh;
-  width: 65vh;
+  height: 60vh;
+  width: 60vh;
+  max-width: 100%;
   margin: auto;
   z-index: -1;
+  @media (max-width: 768px) {
+    font-size: 20px;
+  }
 `;
 
 const SunRays = styled.img.attrs(props => ({
@@ -25,7 +52,7 @@ const SunRays = styled.img.attrs(props => ({
   },
 }))`
   height: 100%;
-  width: auto;
+  width: 100%;
   object-fit: contain;
   transition: transform 0.1s ease-out;
 `;
@@ -40,7 +67,8 @@ const SunFace = styled.img`
   object-fit: contain;
 `;
 
-const Title = ({ heading }) => {
+
+const Home = () => {
   const [rotation, setRotation] = useState(0);
 
   useEffect(() => {
@@ -61,9 +89,14 @@ const Title = ({ heading }) => {
         <SunRays src="/images/sun-rays.png" alt="rays" rotation={rotation} />
         <SunFace src="/images/sun-face.png" alt="face" />
       </SunContainer>
-      <Heading>{heading}</Heading>
+      <Logo src="/images/logo.svg" alt="logo" />
+      <SubHeadingContainer>
+        <h2>Reiki</h2>
+        <h2>Mindfulness</h2>
+        <h2>Massage</h2>
+      </SubHeadingContainer>
     </Section>
   );
 };
 
-export default Title;
+export default Home;

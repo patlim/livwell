@@ -1,11 +1,9 @@
 import groq from 'groq';
 import client from '../client';
-import HomeSection from '../sections/homeSection';
-import TitleSection from '../sections/titleSection';
-import TextSection from '../sections/textSection';
-import Cta from '../sections/cta';
-import Footer from '../sections/footer';
-import Practitioner from '../sections/practitionerSection';
+import HomeSection from '../components/homeSection';
+import TitleSection from '../components/titleSection';
+import TextSection from '../components/textSection';
+import Practitioner from '../components/practitionerSection';
 
 const Page = ({ page }) => {
   if (!page) {
@@ -46,8 +44,6 @@ const Page = ({ page }) => {
           return null;
         })}
       </article>
-      <Cta />
-      <Footer />
     </div>
   );
 };

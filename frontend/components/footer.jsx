@@ -5,15 +5,24 @@ const FooterContainer = styled.div`
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin: 64px;
+  @media (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    margin: 24px;
+  }
 `
 
 const Decal = styled.img`
   grid-column: 1 / span 2;
   width: 60%;
   margin: auto;
+  @media (max-width: 768px) {
+    display: none;
+  }
 `
 const Logo = styled.img`
-  width: 90%;
+  width: 100%;
+  max-width: 1000px;
   height: auto;
   margin: auto;
   grid-row: 2;
@@ -35,7 +44,7 @@ const LinkList = styled.div`
 
 const Footer = () => {
   return (
-    <FooterContainer>
+    <FooterContainer data-scroll-fade>
       <Decal src="/images/lavender.png" alt="lav" />
       <LinkListContainer>
         <LinkList>

@@ -7,7 +7,7 @@ const Section = styled.section`
   justify-content: center;
   text-align: center;
   align-items: center;
-  height: 80vh;
+  aspect-ratio: 2 / 1;
   a {
     font-size: 24px;
   }
@@ -22,6 +22,9 @@ const BgImage = styled.img`
   object-fit: contain;
   margin: auto;
   z-index: -1;
+  @media (max-width: 767px) {
+    width: 95vw;
+  }
 `
 
 const Cta = () => {
