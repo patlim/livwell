@@ -15,12 +15,12 @@ const NavContainer = styled.nav`
   background-color: #37422080;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
   transform: ${({ isVisible }) => (isVisible ? "translate(-50%, 0)" : "translate(-50%, -20px)")};
-  transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-
-  @media (max-width: 768px) {
-    justify-content: space-between;
-    padding: 16px;
-  }
+  
+  ${({ isTransitionApplied }) =>
+    isTransitionApplied &&
+    `
+    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
+  `}
 `;
 
 const Logo = styled.img`
@@ -28,23 +28,11 @@ const Logo = styled.img`
   height: auto;
 `;
 
-const Hamburger = styled.div`
-  display: none;
-  flex-direction: column;
-  justify-content: center;
+const Hamburger = styled.img`
   cursor: pointer;
-
-  span {
-    width: 25px;
-    height: 3px;
-    border-radius: 1.5px;
-    background-color: var(--foreground);
-    margin: 4px;
-    transition: 0.3s;
-  }
-
-  @media (max-width: 768px) {
-    display: flex;
+  width: 18px;
+  @media (min-width: 769px) {
+    display: none;
   }
 `;
 
@@ -61,10 +49,9 @@ const MobileMenu = styled.div`
   opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
   transform: ${({ isOpen }) => (isOpen ? "translateY(0)" : "translateY(-100%)")};
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  z-index: 999; /* Make sure it's above everything else */
+  z-index: 999;
   
   a {
-    font-family: var(--font-averia);
     color: var(--foreground);
     font-size: 24px;
     text-decoration: none;
@@ -93,9 +80,7 @@ const CloseButton = styled.button`
 const LinkContainer = styled.div`
   display: flex;
   gap: 24px;
-
   a {
-    font-family: var(--font-averia);
     color: inherit;
   }
 
@@ -111,17 +96,18 @@ const BottomContainer = styled.div`
   flex-direction: column;
   align-items: flex-end;
   justify-content: flex-end;
-`
+`;
 
 const Decal = styled.img`
   position: absolute;
   bottom: 0;
   left: 0;
   height: 95%;
-`
+`;
 
 const Nav = () => {
   const [isNavVisible, setIsNavVisible] = useState(false);
+  const [isTransitionApplied, setIsTransitionApplied] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -133,17 +119,23 @@ const Nav = () => {
       }
     };
 
+    // Apply transition after page is loaded
+    const applyTransition = () => {
+      setIsTransitionApplied(true);
+    };
+
     window.addEventListener("scroll", handleScroll);
-    handleScroll(); // To ensure the nav visibility is updated if the page loads scrolled down
+    window.addEventListener("load", applyTransition); // Apply transition when page loads
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
+      window.removeEventListener("load", applyTransition);
     };
   }, []);
 
   return (
     <>
-      <NavContainer isVisible={isNavVisible}>
+      <NavContainer isVisible={isNavVisible} isTransitionApplied={isTransitionApplied}>
         <a href="/"><Logo src="/images/logo.svg" alt="Logo" /></a>
         <LinkContainer>
           <a href="/about">About</a>
@@ -151,20 +143,16 @@ const Nav = () => {
           <a href="/events">Events</a>
           <a href="/contact">Contact</a>
         </LinkContainer>
-        <Hamburger onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}>
-          <span></span>
-          <span></span>
-          <span></span>
-        </Hamburger>
+        <Hamburger src="/images/menu.svg" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
       </NavContainer>
 
       <MobileMenu isOpen={isMobileMenuOpen}>
         <CloseButton onClick={() => setIsMobileMenuOpen(false)}><img src="/images/close.svg" /></CloseButton>
-        <a href="/"><Logo src="/images/logo.svg" alt="Logo" /></a>
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/events">Events</a>
-        <a href="/contact">Contact</a>
+        <a href="/" onClick={() => setIsMobileMenuOpen(false)}><Logo src="/images/logo.svg" alt="Logo" /></a>
+        <a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a>
+        <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
+        <a href="/events" onClick={() => setIsMobileMenuOpen(false)}>Events</a>
+        <a href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
         <BottomContainer>
           <Decal src="/images/lavender-vertical.png" alt="lav" />
           <p>+44 78 0516 6798</p>
