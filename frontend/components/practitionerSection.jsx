@@ -57,7 +57,7 @@ const Practitioner = ({ name, description, headshot, buttonText, buttonUrl }) =>
     <PractitionerSection data-scroll-fade>
       <HeadshotContainer>
         <Headshot src={headshot} alt={`${name} headshot`} />
-        <Bee src='/images/bee.png' alt='bee'/>
+        <Bee src='/images/bee.svg' alt='bee'/>
       </HeadshotContainer>
       <Info>
         <Name>{name}</Name>

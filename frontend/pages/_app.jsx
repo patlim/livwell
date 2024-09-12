@@ -4,6 +4,7 @@ import useScrollFade from '../state/hooks/useScrollFade';
 import Cta from "../components/cta";
 import Footer from "../components/footer";
 import Nav from '../components/nav';
+import Bee from '../components/bee';
 
 export const averia = Averia_Serif_Libre({
   subsets: ['latin'],
@@ -18,6 +19,7 @@ export const montserrat = Montserrat({
   weight: ['400', '700'],
 });
 
+const numBees = 4;
 
 export default function App({ Component, pageProps }) {
   useScrollFade();
@@ -27,6 +29,9 @@ export default function App({ Component, pageProps }) {
       <Component {...pageProps} />
       <Cta />
       <Footer />
+      {[...Array(numBees)].map((_, index) => (
+        <Bee key={index} />
+      ))}
     </main>
   )
 }
