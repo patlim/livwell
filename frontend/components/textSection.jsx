@@ -29,7 +29,7 @@ const Heading = styled.h2`
 const TextSection = ({ heading, showHeading, alignment = 'center', body }) => {
   return (
     <section>
-      {heading && showHeading && <Heading $alignment={alignment}>{heading}</Heading>}
+      {heading && showHeading && <Heading className='h4' $alignment={alignment}>{heading}</Heading>}
       <BodyContainer $alignment={alignment}>
         <PortableText value={body} components={customComponents} />
       </BodyContainer>

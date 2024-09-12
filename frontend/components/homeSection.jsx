@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import Sun from './sun';
 
 const Section = styled.section`
   display: flex;
@@ -13,8 +13,8 @@ const Logo = styled.img`
 `
 
 const SubHeadingContainer = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  justify-content: space-between;
   width: 100%;
   max-width: 960px;
   margin: 24px auto;
@@ -22,73 +22,16 @@ const SubHeadingContainer = styled.div`
     font-family: var(--font-montserrat);
     font-weight: normal;
     font-size: 40px;
-    &:nth-child(2) {
-      text-align: center;
-    }
-    &:last-child {
-      text-align: end;
-    }
     @media (max-width: 768px) {
       font-size: 20px;
     }
   }
 `
 
-const SunContainer = styled.div`
-  position: relative;
-  height: 60vh;
-  width: 60vh;
-  max-width: 100%;
-  margin: auto;
-  z-index: -1;
-  @media (max-width: 768px) {
-    font-size: 20px;
-  }
-`;
-
-const SunRays = styled.img.attrs(props => ({
-  style: {
-    transform: `rotate(${props.rotation}deg)`,
-  },
-}))`
-  height: 100%;
-  width: 100%;
-  object-fit: contain;
-  transition: transform 0.1s ease-out;
-`;
-
-const SunFace = styled.img`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 33%;
-  height: auto;
-  object-fit: contain;
-`;
-
-
 const Home = () => {
-  const [rotation, setRotation] = useState(0);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const newRotation = scrollY * 0.025;
-      setRotation(newRotation);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
-
   return (
     <Section>
-      <SunContainer>
-        <SunRays src="/images/sun-rays.png" alt="rays" rotation={rotation} />
-        <SunFace src="/images/sun-face.png" alt="face" />
-      </SunContainer>
+      <Sun />
       <Logo src="/images/logo.svg" alt="logo" />
       <SubHeadingContainer>
         <h2>Reiki</h2>

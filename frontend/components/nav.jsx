@@ -14,7 +14,7 @@ const NavContainer = styled.nav`
   backdrop-filter: blur(5px);
   background-color: #37422080;
   opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transform: ${({ isVisible }) => (isVisible ? "translate(-50%, 0)" : "translate(-50%, -20px)")};
+  transform: ${({ isVisible }) => (isVisible ? "translate(-50%, 0)" : "translate(-50%, -100%)")};
   
   ${({ isTransitionApplied }) =>
     isTransitionApplied &&

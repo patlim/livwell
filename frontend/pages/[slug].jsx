@@ -4,18 +4,23 @@ import HomeSection from '../components/homeSection';
 import TitleSection from '../components/titleSection';
 import TextSection from '../components/textSection';
 import Practitioner from '../components/practitionerSection';
+import EventsSection from '../components/eventsSection';
 
 const Page = ({ page }) => {
   if (!page) {
     return <div>Loading...</div>;
   }
+  
   const { title, pageBuilder } = page;
+  
   return (
     <div>
       <article>
         { title === "LIVWELL"
             ? <HomeSection />
-            : <TitleSection heading={title}/>
+            : title 
+              ? <TitleSection heading={title}/>
+              : <TitleSection heading='404' subheading='page not found'/>
         }
         {pageBuilder && pageBuilder.map((block, index) => {
           if (block._type === 'textSection') {
@@ -27,7 +32,7 @@ const Page = ({ page }) => {
                 body={block.body}
                 alignment={block.alignment}
               />
-            )
+            );
           }
           if (block._type === 'practitionerSection') {
             return (
@@ -39,7 +44,15 @@ const Page = ({ page }) => {
                 buttonText={block.buttonText}
                 buttonUrl={block.buttonUrl}
               />
-            )
+            );
+          }
+          if (block._type === 'eventsSection') {
+            return (
+              <EventsSection
+                key={index}
+                events={block.events}
+              />
+            );
           }
           return null;
         })}
@@ -70,6 +83,20 @@ const query = groq`*[_type == "page" && slug.current == $slug][0]{
       },
       buttonText,
       buttonUrl
+    },
+    _type == "eventsSection" => @->{
+      _type,
+      "events": events[]->{
+        title,
+        date,
+        location,
+        description,
+        image{
+          asset->{
+            url
+          }
+        }
+      } | order(date asc) [date >= now()] // Correct filter for future events
     }
   }
 }`;
