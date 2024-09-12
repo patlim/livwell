@@ -19,7 +19,7 @@ const EventsSection = ({ events }) => {
   return (
     <EventsSectionContainer>
       {events.map((event, index) => (
-        <div key={index}>
+        <div data-scroll-fade key={index}>
           <h3 className='h4'>{event.title}</h3>
           <DateContainer>
             <p>{moment(event.date).format('Do MMMM')}</p>
