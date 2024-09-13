@@ -55,7 +55,7 @@ h5, .h5 {
   font-weight: normal;
 }
 
-p, a, button, label, input, select, textarea {
+p, a, button, ul, li, label, input, select, textarea {
   font-family: var(--font-montserrat);
   font-size: 18px;
 }

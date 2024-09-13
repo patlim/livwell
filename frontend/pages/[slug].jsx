@@ -59,6 +59,15 @@ const query = groq`*[_type == "page" && slug.current == $slug][0]{
           }
         }
       } | order(date asc) [date >= now()]
+    },
+    _type == "pricingSection" => @->{
+      _type,
+      heading,
+      subheading,
+      prices[]{
+        duration,
+        price
+      }
     }
   }
 }`;

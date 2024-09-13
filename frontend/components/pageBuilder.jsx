@@ -3,6 +3,7 @@ import TextSection from './textSection';
 import Practitioner from './practitionerSection';
 import EventsSection from './eventsSection';
 import Cta from './cta';
+import PricingSection from './pricingSection';
 
 const PageBuilder = ({ pageBuilder }) => {
   return (
@@ -36,6 +37,16 @@ const PageBuilder = ({ pageBuilder }) => {
             <EventsSection
               key={index}
               events={block.events}
+            />
+          );
+        }
+        if (block._type === 'pricingSection') {
+          return (
+            <PricingSection
+              key={index}
+              heading={block.heading}
+              subheading={block.subheading}
+              prices={block.prices}
             />
           );
         }

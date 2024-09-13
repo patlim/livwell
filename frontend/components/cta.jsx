@@ -36,7 +36,7 @@ const Cta = () => {
         <Link href='contact' passHref><h5>Contact</h5></Link>
       </div>
       <BgImage
-        src="/images/leaf.png"
+        src="/images/leaf.svg"
         alt="background"
       />
     </Section>
