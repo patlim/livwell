@@ -33,7 +33,7 @@ const Cta = () => {
     <Section>
       <div data-scroll-fade>
         <h2>Get in touch</h2>
-        <Link href='contact'><h5>Contact</h5></Link>
+        <Link href='contact' passHref><h5>Contact</h5></Link>
       </div>
       <BgImage
         src="/images/leaf.png"

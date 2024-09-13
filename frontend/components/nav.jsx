@@ -1,4 +1,6 @@
+import Link from "next/link";
 import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import styled from "styled-components";
 
 const NavContainer = styled.nav`
@@ -7,25 +9,29 @@ const NavContainer = styled.nav`
   justify-content: space-between;
   padding: 16px;
   width: 100%;
-  max-width: 1000px;
+  backdrop-filter: blur(5px);
+  background-color: #00000000;
   position: fixed;
   top: 0;
-  left: 50%;
-  backdrop-filter: blur(5px);
-  background-color: #37422080;
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
-  transform: ${({ isVisible }) => (isVisible ? "translate(-50%, 0)" : "translate(-50%, -100%)")};
-  
-  ${({ isTransitionApplied }) =>
-    isTransitionApplied &&
-    `
-    transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
-  `}
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+`;
+
+const NavContent = styled.div`
+  width: 100%;
+  max-width: 850px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 `;
 
 const Logo = styled.img`
   width: 150px;
   height: auto;
+  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  transition: opacity 0.5s ease-in-out;
 `;
 
 const Hamburger = styled.img`
@@ -106,57 +112,64 @@ const Decal = styled.img`
 `;
 
 const Nav = () => {
-  const [isNavVisible, setIsNavVisible] = useState(false);
-  const [isTransitionApplied, setIsTransitionApplied] = useState(false);
+  const [isLogoVisible, setIsLogoVisible] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { pathname } = useRouter();
 
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 0) {
-        setIsNavVisible(true);
-      } else {
-        setIsNavVisible(false);
-      }
-    };
+    if (pathname === '/') {
+      const handleScroll = () => {
+        setIsLogoVisible(window.scrollY > 0);
+      };
 
-    // Apply transition after page is loaded
-    const applyTransition = () => {
-      setIsTransitionApplied(true);
-    };
+      const fadeInLogo = () => {
+        setIsLogoVisible(true);
+      };
 
-    window.addEventListener("scroll", handleScroll);
-    window.addEventListener("load", applyTransition); // Apply transition when page loads
+      window.addEventListener("scroll", handleScroll);
+      window.addEventListener("load", fadeInLogo);
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      window.removeEventListener("load", applyTransition);
-    };
-  }, []);
+      return () => {
+        window.removeEventListener("scroll", handleScroll);
+        window.removeEventListener("load", fadeInLogo);
+      };
+    } else {
+      setIsLogoVisible(true);
+    }
+  }, [pathname]);
 
   return (
     <>
-      <NavContainer isVisible={isNavVisible} isTransitionApplied={isTransitionApplied}>
-        <a href="/"><Logo src="/images/logo.svg" alt="Logo" /></a>
-        <LinkContainer>
-          <a href="/about">About</a>
-          <a href="/services">Services</a>
-          <a href="/events">Events</a>
-          <a href="/contact">Contact</a>
-        </LinkContainer>
-        <Hamburger src="/images/menu.svg" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+      <NavContainer>
+        <NavContent>
+          <Link href="/" passHref>
+            <Logo src="/images/logo.svg" alt="Logo" isVisible={isLogoVisible} />
+          </Link>
+          <LinkContainer>
+            <Link href="/about" passHref>About</Link>
+            <Link href="/services" passHref>Services</Link>
+            <Link href="/events" passHref>Events</Link>
+            <Link href="/contact" passHref>Contact</Link>
+          </LinkContainer>
+          <Hamburger src="/images/menu.svg" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+        </NavContent>
       </NavContainer>
 
       <MobileMenu isOpen={isMobileMenuOpen}>
-        <CloseButton onClick={() => setIsMobileMenuOpen(false)}><img src="/images/close.svg" /></CloseButton>
-        <a href="/" onClick={() => setIsMobileMenuOpen(false)}><Logo src="/images/logo.svg" alt="Logo" /></a>
-        <a href="/about" onClick={() => setIsMobileMenuOpen(false)}>About</a>
-        <a href="/services" onClick={() => setIsMobileMenuOpen(false)}>Services</a>
-        <a href="/events" onClick={() => setIsMobileMenuOpen(false)}>Events</a>
-        <a href="/contact" onClick={() => setIsMobileMenuOpen(false)}>Contact</a>
+        <CloseButton onClick={() => setIsMobileMenuOpen(false)}><img src="/images/close.svg" alt="Close" /></CloseButton>
+        <Link href="/" passHref onClick={() => setIsMobileMenuOpen(false)}>
+          <Logo src="/images/logo.svg" alt="Logo" isVisible={true} />
+        </Link>
+        <Link href="/about" passHref onClick={() => setIsMobileMenuOpen(false)}>About</Link>
+        <Link href="/services" passHref onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
+        <Link href="/events" passHref onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
+        <Link href="/contact" passHref onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
         <BottomContainer>
-          <Decal src="/images/lavender-vertical.png" alt="lav" />
+          <Decal src="/images/lavender-vertical.png" alt="Lavender Decal" />
           <p>+44 78 0516 6798</p>
-          <a href="/contact"><p>livwelllondon@gmail.com</p></a>
+          <Link href="/contact" passHref>
+            <p>livwelllondon@gmail.com</p>
+          </Link>
         </BottomContainer>
       </MobileMenu>
     </>

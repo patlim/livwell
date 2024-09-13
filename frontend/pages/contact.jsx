@@ -8,8 +8,10 @@ const ContactSection = styled.section`
   width: 100%;
   max-width: 750px;
   gap: 24px;
+  margin: 180px auto;
   @media (max-width: 767px) {
     gap: 12px;
+    margin: 128px auto;
   }
 `;
 

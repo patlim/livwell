@@ -45,14 +45,14 @@ const LinkList = styled.div`
 
 const Footer = () => {
   return (
-    <FooterContainer data-scroll-fade>
+    <FooterContainer>
       <Decal src="/images/lavender.png" alt="lav" />
       <LinkListContainer>
         <LinkList>
-          <Link href='about'>About</Link>
-          <Link href='services'>Services</Link>
-          <Link href='events'>Events</Link>
-          <Link href='contact'>Contact</Link>
+          <Link href='about' passHref>About</Link>
+          <Link href='services' passHref>Services</Link>
+          <Link href='events' passHref>Events</Link>
+          <Link href='contact' passHref>Contact</Link>
         </LinkList>
         <br />
         <LinkList>
