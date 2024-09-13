@@ -5,6 +5,9 @@ import textSection from './textSection'
 import practitionerSection from './practitionerSection'
 import event from './event'
 import eventsSection from './eventsSection'
+import contactSubmission from './contactSubmission'
+import priceItem from './priceItem'
+import pricingSection from './pricingSection'
 
 export const schemaTypes = [
   blockContent,
@@ -14,4 +17,7 @@ export const schemaTypes = [
   practitionerSection,
   event,
   eventsSection,
+  contactSubmission,
+  priceItem,
+  pricingSection,
 ]

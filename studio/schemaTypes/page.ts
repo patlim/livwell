@@ -42,6 +42,12 @@ export default defineType({
           type: 'reference',
           to: { type: 'eventsSection' },
         }),
+        defineArrayMember({
+          name: 'pricingSection',
+          title: 'Pricing Section',
+          type: 'reference',
+          to: { type: 'pricingSection' },
+        }),
       ],
     }),
   ],
