@@ -1,69 +1,31 @@
+// pages/[slug].jsx
+import React from 'react';
+import TitleSection from '../components/titleSection';
+import PageBuilder from '../components/pageBuilder';
 import groq from 'groq';
 import client from '../client';
-import HomeSection from '../components/homeSection';
-import TitleSection from '../components/titleSection';
-import TextSection from '../components/textSection';
-import Practitioner from '../components/practitionerSection';
-import EventsSection from '../components/eventsSection';
 
 const Page = ({ page }) => {
   if (!page) {
     return <div>Loading...</div>;
   }
-  
+
   const { title, pageBuilder } = page;
-  
+
   return (
     <div>
       <article>
-        { title === "LIVWELL"
-            ? <HomeSection />
-            : title 
-              ? <TitleSection heading={title}/>
-              : <TitleSection heading='404' subheading='page not found'/>
-        }
-        {pageBuilder && pageBuilder.map((block, index) => {
-          if (block._type === 'textSection') {
-            return (
-              <TextSection
-                key={index}
-                heading={block.heading}
-                showHeading={block.showHeading}
-                body={block.body}
-                alignment={block.alignment}
-              />
-            );
-          }
-          if (block._type === 'practitionerSection') {
-            return (
-              <Practitioner
-                key={index}
-                name={block.name}
-                description={block.description}
-                headshot={block.headshot.asset.url}
-                buttonText={block.buttonText}
-                buttonUrl={block.buttonUrl}
-              />
-            );
-          }
-          if (block._type === 'eventsSection') {
-            return (
-              <EventsSection
-                key={index}
-                events={block.events}
-              />
-            );
-          }
-          return null;
-        })}
+        <TitleSection heading={title} />
+        <PageBuilder pageBuilder={pageBuilder} />
       </article>
     </div>
   );
 };
 
-const query = groq`*[_type == "page" && slug.current == $slug][0]{
-  title,
+const query = groq`*[_type == "page" && slug.current == $slug][0]{ 
+  title, 
   pageBuilder[]{
+    _type,
     ...,
     _type == "textSection" => @->{
       _type,
@@ -96,11 +58,10 @@ const query = groq`*[_type == "page" && slug.current == $slug][0]{
             url
           }
         }
-      } | order(date asc) [date >= now()] // Correct filter for future events
+      } | order(date asc) [date >= now()]
     }
   }
 }`;
-
 
 export async function getStaticPaths() {
   const paths = await client.fetch(
@@ -116,8 +77,6 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   const { slug = "" } = context.params;
   const page = await client.fetch(query, { slug });
-  console.log("Fetched Page Data:", page);
-  
   return {
     props: {
       page,

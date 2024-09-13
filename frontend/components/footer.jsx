@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 const FooterContainer = styled.div`
@@ -48,10 +49,10 @@ const Footer = () => {
       <Decal src="/images/lavender.png" alt="lav" />
       <LinkListContainer>
         <LinkList>
-          <a>About</a>
-          <a>Services</a>
-          <a>Events</a>
-          <a>Contact</a>
+          <Link href='about'>About</Link>
+          <Link href='services'>Services</Link>
+          <Link href='events'>Events</Link>
+          <Link href='contact'>Contact</Link>
         </LinkList>
         <br />
         <LinkList>

@@ -1,3 +1,4 @@
+import Link from "next/link";
 import styled from "styled-components";
 
 const Section = styled.section`
@@ -32,7 +33,7 @@ const Cta = () => {
     <Section>
       <div data-scroll-fade>
         <h2>Get in touch</h2>
-        <a><h5>Contact</h5></a>
+        <Link href='contact'><h5>Contact</h5></Link>
       </div>
       <BgImage
         src="/images/leaf.png"

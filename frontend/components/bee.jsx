@@ -1,9 +1,21 @@
 import React, { useEffect, useState } from "react";
+import debounce from "../utils/debounce";
+import styled from "styled-components";
+import { useRouter } from 'next/router';
+
+const BeeImage = styled.img`
+  position: absolute;
+  width: 25px;
+  top: ${(props) => props.top}px;
+  left: ${(props) => props.left}px;
+  transform: translateY(${(props) => props.scrollY * 0.3}px);
+`;
 
 const Bee = () => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [beeImage, setBeeImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
+  const router = useRouter();
 
   const beeImages = [
     '/images/bee.svg',
@@ -27,24 +39,36 @@ const Bee = () => {
     setScrollY(window.scrollY);
   };
 
+  const handleResize = debounce(() => {
+    getRandomPosition();
+  }, 500);
+
   useEffect(() => {
     getRandomPosition();
     getRandomBeeImage();
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('resize', handleResize);
+
+    const handleRouteChange = () => {
+      getRandomPosition();
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('resize', handleResize);
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
 
   return (
-    <img 
-      src={beeImage} 
-      alt="bee" 
-      style={{
-        position: "absolute",
-        top: `${position.top - scrollY * 0.5}px`,
-        left: `${position.left}px`,
-        width: "25px",
-        transform: `translateY(${scrollY * 0.3}px)`,
-      }}
+    <BeeImage
+      src={beeImage}
+      alt="bee"
+      top={position.top - scrollY * 0.5}
+      left={position.left}
+      scrollY={scrollY}
     />
   );
 };

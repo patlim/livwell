@@ -1,35 +1,75 @@
-import Link from 'next/link'
-import groq from 'groq'
-import client from '../client'
+// pages/index.jsx
+import React from 'react';
+import HomeSection from '../components/homeSection';
+import PageBuilder from '../components/pageBuilder';
+import client from '../client';
+import groq from 'groq';
 
-const Index = ({posts}) => {
-    return (
-      <div>
-        <h1>Welcome to a blog!</h1>
-        {posts.length > 0 && posts.map(
-          ({ _id, title = '', slug = '', publishedAt = '' }) =>
-            slug && (
-              <li key={_id}>
-                <Link href={`/post/${encodeURIComponent(slug.current)}`}>
-                  {title}
-                </Link>{' '}
-                ({new Date(publishedAt).toDateString()})
-              </li>
-            )
-        )}
-      </div>
-    )
-}
+const HomePage = ({ page }) => {
+  if (!page) {
+    return <div>Loading...</div>;
+  }
+
+  const { title, pageBuilder } = page;
+
+  return (
+    <div>
+      <article>
+        <HomeSection />
+        <PageBuilder pageBuilder={pageBuilder} />
+      </article>
+    </div>
+  );
+};
+
+const homePageQuery = groq`*[_type == "page" && slug.current == "home"][0]{ 
+  title, 
+  pageBuilder[]{
+    _type,
+    ...,
+    _type == "textSection" => @->{
+      _type,
+      heading,
+      showHeading,
+      alignment,
+      body
+    },
+    _type == "practitionerSection" => @->{
+      _type,
+      name,
+      description,
+      headshot{
+        asset->{
+          url
+        }
+      },
+      buttonText,
+      buttonUrl
+    },
+    _type == "eventsSection" => @->{
+      _type,
+      "events": events[]->{
+        title,
+        date,
+        location,
+        description,
+        image{
+          asset->{
+            url
+          }
+        }
+      } | order(date asc) [date >= now()]
+    }
+  }
+}`;
 
 export async function getStaticProps() {
-    const posts = await client.fetch(groq`
-      *[_type == "post" && publishedAt < now()] | order(publishedAt desc)
-    `)
-    return {
-      props: {
-        posts
-      }
-    }
+  const page = await client.fetch(homePageQuery);
+  return {
+    props: {
+      page,
+    },
+  };
 }
 
-export default Index
+export default HomePage;

@@ -1,13 +1,12 @@
 import moment from 'moment';
 import styled from 'styled-components';
 
-const EventsSectionContainer = styled.div`
+const EventsSectionContainer = styled.section`
   display: flex;
   flex-direction: column;
   gap: 36px;
   width: 100%;
   max-width: 650px;
-  margin: auto;
 `
 
 const DateContainer = styled.div`

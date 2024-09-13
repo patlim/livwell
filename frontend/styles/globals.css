@@ -4,6 +4,7 @@
   --background: #374220;
   --foreground: #CABB94;
   --accent: #EABB4D;
+  --dark: #272E16;
 }
 
 html,
@@ -54,7 +55,7 @@ h5, .h5 {
   font-weight: normal;
 }
 
-p, a, button {
+p, a, button, label, input, select, textarea {
   font-family: var(--font-montserrat);
   font-size: 18px;
 }
@@ -68,6 +69,8 @@ button {
   padding: 0;
   background-color: transparent;
   border: none;
+  color: var(--accent);
+  cursor: pointer;
 }
 
 a, button {
@@ -80,25 +83,34 @@ button:hover {
   cursor: pointer;
 }
 
+input, select, textarea {
+  border: none;
+  border-radius: 4px;
+  background: var(--dark);
+  padding: 12px 24px;
+  outline: none;
+  color: var(--foreground);
+}
+
 section {
   margin: 64px auto;
   padding: 0 24px;
 }
 
 @media (max-width: 768px) {
-  h1 {
+  h1, .h1 {
     font-size: 64px;
   }
-  h2 {
+  h2, .h2 {
     font-size: 48px;
   }
-  h3 {
+  h3, .h3 {
     font-size: 32px;
   }
-  h4 {
+  h4, .h4 {
     font-size: 24px;
   }
-  h5 {
+  h5, .h5 {
     font-size: 18px;
   }
   section {

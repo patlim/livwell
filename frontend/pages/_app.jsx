@@ -27,7 +27,6 @@ export default function App({ Component, pageProps }) {
     <main className={`${averia.variable} ${montserrat.variable}`}>
       <Nav />
       <Component {...pageProps} />
-      <Cta />
       <Footer />
       {[...Array(numBees)].map((_, index) => (
         <Bee key={index} />
