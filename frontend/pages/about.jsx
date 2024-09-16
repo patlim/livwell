@@ -1,25 +1,25 @@
 import React from 'react';
-import HomeSection from '../components/homeSection';
+import TitleSection from '../components/titleSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
 
-const HomePage = ({ page }) => {
+const AboutPage = ({ page }) => {
   if (!page) {
     return <div>Loading...</div>;
   }
 
-  const { pageBuilder } = page;
+  const { title, pageBuilder } = page;
 
   return (
     <div>
-      <HomeSection />
+      <TitleSection heading={title} />
       <PageBuilder pageBuilder={pageBuilder} />
     </div>
   );
 };
 
-const query = getPageQuery('home');
+const query = getPageQuery('about');
 
 export async function getStaticProps() {
   const page = await client.fetch(query);
@@ -30,4 +30,4 @@ export async function getStaticProps() {
   };
 }
 
-export default HomePage;
+export default AboutPage;

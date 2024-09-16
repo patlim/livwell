@@ -19,7 +19,7 @@ export const montserrat = Montserrat({
   weight: ['400', '700'],
 });
 
-const numBees = 4;
+const numBees = 3;
 
 export default function App({ Component, pageProps }) {
   useScrollFade();
