@@ -34,7 +34,7 @@ h1, h2, h3, h4,
 }
 
 h1, .h1 {
-  font-size: 256px;
+  font-size: 128px;
 }
 
 h2, .h2 {
@@ -90,6 +90,10 @@ input, select, textarea {
   padding: 12px 24px;
   outline: none;
   color: var(--foreground);
+}
+
+textarea {
+  resize: none;
 }
 
 section {
