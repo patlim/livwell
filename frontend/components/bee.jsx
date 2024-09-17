@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import debounce from '../utils/debounce';
-import { useRouter } from 'next/router'; // Import useRouter from next/router
+import { useRouter } from 'next/router';
 
-// Use attrs to set frequently changed styles using inline styles
 const BeeImage = styled.img.attrs((props) => ({
   style: {
     top: `${props.$top}px`,
@@ -56,7 +55,6 @@ const Bee = () => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
-    // Function to handle route changes
     const handleRouteChange = () => {
       getRandomPosition();
     };
