@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 
 const ContactSection = styled.section`
@@ -72,6 +72,10 @@ const Contact = () => {
   });
 
   const [responseMessage, setResponseMessage] = useState('');
+
+  useEffect(() => {
+    document.title = 'Livwell | Contact';
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();

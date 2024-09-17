@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import TitleSection from '../components/titleSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
@@ -10,6 +10,10 @@ const AboutPage = ({ page }) => {
   }
 
   const { title, pageBuilder } = page;
+
+  useEffect(() => {
+    document.title = 'Livwell | About us';
+  }, []);
 
   return (
     <div>

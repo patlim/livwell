@@ -1,9 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import HomeSection from '../components/homeSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
-import { motion } from 'framer-motion';
 
 const HomePage = ({ page }) => {
   if (!page) {
@@ -12,15 +11,15 @@ const HomePage = ({ page }) => {
 
   const { pageBuilder } = page;
 
+  useEffect(() => {
+    document.title = 'Livwell | Home';
+  }, []);
+
   return (
-    <motion.div
-      inital={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
+    <div>
       <HomeSection />
       <PageBuilder pageBuilder={pageBuilder} />
-    </motion.div>
+    </div>
   );
 };
 
