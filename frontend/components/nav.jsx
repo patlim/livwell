@@ -30,7 +30,7 @@ const NavContent = styled.div`
 const Logo = styled.img`
   width: 150px;
   height: auto;
-  opacity: ${({ isVisible }) => (isVisible ? 1 : 0)};
+  opacity: ${props => (props.$isVisible ? 1 : 0)};
   transition: opacity 0.5s ease-in-out;
 `;
 
@@ -52,8 +52,8 @@ const MobileMenu = styled.div`
   width: 100%;
   height: 100%;
   background-color: var(--background);
-  opacity: ${({ isOpen }) => (isOpen ? 1 : 0)};
-  transform: ${({ isOpen }) => (isOpen ? "translateY(0)" : "translateY(-100%)")};
+  opacity: ${props => (props.$isOpen ? 1 : 0)};
+  transform: ${props => (props.$isOpen ? "translateY(0)" : "translateY(-100%)")};
   transition: opacity 0.5s ease-in-out, transform 0.5s ease-in-out;
   z-index: 999;
   
@@ -143,7 +143,7 @@ const Nav = () => {
       <NavContainer>
         <NavContent>
           <Link href="/" passHref>
-            <Logo src="/images/logo.svg" alt="Logo" isVisible={isLogoVisible} />
+            <Logo src="/images/logo.svg" alt="Logo" $isVisible={isLogoVisible} />
           </Link>
           <LinkContainer>
             <Link href="/about" passHref>About</Link>
@@ -155,10 +155,10 @@ const Nav = () => {
         </NavContent>
       </NavContainer>
 
-      <MobileMenu isOpen={isMobileMenuOpen}>
+      <MobileMenu $isOpen={isMobileMenuOpen}>
         <CloseButton onClick={() => setIsMobileMenuOpen(false)}><img src="/images/close.svg" alt="Close" /></CloseButton>
         <Link href="/" passHref onClick={() => setIsMobileMenuOpen(false)}>
-          <Logo src="/images/logo.svg" alt="Logo" isVisible={true} />
+          <Logo src="/images/logo.svg" alt="Logo" $isVisible />
         </Link>
         <Link href="/about" passHref onClick={() => setIsMobileMenuOpen(false)}>About</Link>
         <Link href="/services" passHref onClick={() => setIsMobileMenuOpen(false)}>Services</Link>

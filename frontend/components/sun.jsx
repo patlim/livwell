@@ -12,7 +12,7 @@ const SunContainer = styled.div`
 
 const SunRays = styled.img.attrs(props => ({
   style: {
-    transform: `rotate(${props.rotation}deg)`,
+    transform: `rotate(${props.$rotation}deg)`,
   },
 }))`
   height: 100%;
@@ -47,7 +47,7 @@ const Sun = () => {
   }, []);
   return (
     <SunContainer>
-      <SunRays src="/images/sun-rays.png" alt="rays" rotation={rotation} />
+      <SunRays src="/images/sun-rays.png" alt="rays" $rotation={rotation} />
       <SunFace src="/images/sun-face.png" alt="face" />
     </SunContainer>
   );

@@ -1,22 +1,24 @@
-import React, { useEffect, useState } from "react";
-import debounce from "../utils/debounce";
-import styled from "styled-components";
-import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import styled from 'styled-components';
+import debounce from '../utils/debounce';
+import { useRouter } from 'next/router'; // Import useRouter from next/router
 
-const BeeImage = styled.img`
+// Use attrs to set frequently changed styles using inline styles
+const BeeImage = styled.img.attrs((props) => ({
+  style: {
+    top: `${props.$top}px`,
+    left: `${props.$left}px`,
+    transform: `translateY(${props.$scrollY * 0.3}px)`,
+  },
+}))`
   position: absolute;
   width: 25px;
-  top: ${(props) => props.top}px;
-  left: ${(props) => props.left}px;
-  transform: translateY(${(props) => props.scrollY * 0.3}px);
 `;
 
 const Bee = () => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [beeImage, setBeeImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
-  const [windowHeight, setWindowHeight] = useState(0);
-  const [windowWidth, setWindowWidth] = useState(0);
   const router = useRouter();
 
   const beeImages = [
@@ -27,8 +29,11 @@ const Bee = () => {
   ];
 
   const getRandomPosition = () => {
-    const randomTop = Math.floor(Math.random() * document.body.scrollHeight);
-    const randomLeft = Math.floor(Math.random() * window.innerWidth);
+    const pageHeight = document.documentElement.scrollHeight;
+    const pageWidth = window.innerWidth;
+
+    const randomTop = Math.floor(Math.random() * pageHeight);
+    const randomLeft = Math.floor(Math.random() * pageWidth);
     setPosition({ top: randomTop, left: randomLeft });
   };
 
@@ -42,11 +47,7 @@ const Bee = () => {
   };
 
   const handleResize = debounce(() => {
-    if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
-      getRandomPosition();
-      setWindowHeight(window.innerHeight);
-      setWindowWidth(window.innerWidth);
-    }
+    getRandomPosition();
   }, 500);
 
   useEffect(() => {
@@ -55,6 +56,7 @@ const Bee = () => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleResize);
 
+    // Function to handle route changes
     const handleRouteChange = () => {
       getRandomPosition();
     };
@@ -63,7 +65,7 @@ const Bee = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', (evt) => handleResize(evt));
+      window.removeEventListener('resize', handleResize);
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
@@ -72,9 +74,9 @@ const Bee = () => {
     <BeeImage
       src={beeImage}
       alt="bee"
-      top={position.top - scrollY * 0.5}
-      left={position.left}
-      scrollY={scrollY}
+      $top={position.top - scrollY * 0.5}
+      $left={position.left}
+      $scrollY={scrollY}
     />
   );
 };
