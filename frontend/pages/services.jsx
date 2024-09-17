@@ -12,7 +12,7 @@ const ServicesPage = ({ page }) => {
   const { title, pageBuilder } = page;
 
   useEffect(() => {
-    document.title = 'LIVWELL | Our services';
+    document.title = 'Livwell | Our services';
   }, []);
 
   return (
