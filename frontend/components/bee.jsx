@@ -15,6 +15,8 @@ const Bee = () => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [beeImage, setBeeImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
+  const [windowHeight, setWindowHeight] = useState(0);
+  const [windowWidth, setWindowWidth] = useState(0);
   const router = useRouter();
 
   const beeImages = [
@@ -40,7 +42,11 @@ const Bee = () => {
   };
 
   const handleResize = debounce(() => {
-    getRandomPosition();
+    if (window.innerWidth !== windowWidth || window.innerHeight !== windowHeight) {
+      getRandomPosition();
+      setWindowHeight(window.innerHeight);
+      setWindowWidth(window.innerWidth);
+    }
   }, 500);
 
   useEffect(() => {
@@ -57,7 +63,7 @@ const Bee = () => {
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('resize', (evt) => handleResize(evt));
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
