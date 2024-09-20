@@ -21,13 +21,17 @@ const Decal = styled.img`
     display: none;
   }
 `
-const Logo = styled.img`
+
+const HomeLink = styled(Link)`
   width: 100%;
   max-width: 1000px;
-  height: auto;
   margin: auto;
   grid-row: 2;
   grid-column: 1 / span 3;
+`
+const Logo = styled.img`
+  width: 100%;
+  height: auto;
 `
 
 const LinkListContainer = styled.div`
@@ -60,7 +64,7 @@ const Footer = () => {
           <Link href="mailto:livwelllondon@gmail.com">livwelllondon@gmail.com</Link>
         </LinkList>
       </LinkListContainer>
-      <Logo src="/images/logo.svg" alt="logo" />
+      <HomeLink href='/' passHref><Logo src="/images/logo.svg" alt="logo" /></HomeLink>
     </FooterContainer>
   );
 }
