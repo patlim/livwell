@@ -52,7 +52,7 @@ const Description = styled.h5`
   margin-bottom: 1rem;
 `;
 
-const Practitioner = ({ name, description, headshot, buttonText, buttonUrl }) => {
+const Practitioner = ({ name, description, headshot, buttonText, buttonLink }) => {
   return (
     <PractitionerSection data-scroll-fade>
       <HeadshotContainer>
@@ -62,7 +62,7 @@ const Practitioner = ({ name, description, headshot, buttonText, buttonUrl }) =>
       <Info>
         <Name>{name}</Name>
         <Description>{description}</Description>
-        <a href={buttonUrl}><h5>{buttonText}</h5></a>
+        <a href={buttonLink}><h5>{buttonText}</h5></a>
       </Info>
     </PractitionerSection>
   );
