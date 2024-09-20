@@ -4,6 +4,7 @@ import Practitioner from './practitionerSection';
 import EventsSection from './eventsSection';
 import Cta from './cta';
 import PricingSection from './pricingSection';
+import TestimonialSection from './testimonialSection';
 
 const PageBuilder = ({ pageBuilder }) => {
   return (
@@ -49,6 +50,14 @@ const PageBuilder = ({ pageBuilder }) => {
               prices={block.prices}
             />
           );
+        }
+        if (block._type === 'testimonialSection') {
+          return (
+            <TestimonialSection
+              key={index}
+              testimonials={block.testimonials}
+            />
+          )
         }
         return null;
       })}

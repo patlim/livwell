@@ -47,6 +47,14 @@ export default function getPageQuery(pageSlug) {
           duration,
           price
         }
+      },
+      _type == "testimonialSection" => @->{
+        _type,
+        testimonials[]{
+          testimonialText,
+          authorName,
+          authorDescription,
+        }
       }
     }
   }`;

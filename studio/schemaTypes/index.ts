@@ -8,6 +8,8 @@ import eventsSection from './eventsSection'
 import contactSubmission from './contactSubmission'
 import priceItem from './priceItem'
 import pricingSection from './pricingSection'
+import testimonialSection from './testimonialSection'
+import testimonialItem from './testimonialItem'
 
 export const schemaTypes = [
   blockContent,
@@ -20,4 +22,6 @@ export const schemaTypes = [
   contactSubmission,
   priceItem,
   pricingSection,
+  testimonialSection,
+  testimonialItem,
 ]

@@ -48,6 +48,12 @@ export default defineType({
           type: 'reference',
           to: { type: 'pricingSection' },
         }),
+        defineArrayMember({
+          name: 'testimonialSection',
+          title: 'Testimonial Section',
+          type: 'reference',
+          to: { type: 'testimonialSection' },
+        }),
       ],
     }),
   ],

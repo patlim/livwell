@@ -101,6 +101,24 @@ section {
   padding: 0 24px;
 }
 
+.swiper-button-prev {
+  background-image: url("/images/left-arrow.svg") !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.swiper-button-prev::after,
+.swiper-button-next::after {
+  display: none;
+}
+
+.swiper-button-next {
+  background-image: url("/images/right-arrow.svg") !important;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
 @media (max-width: 768px) {
   h1, .h1 {
     font-size: 64px;

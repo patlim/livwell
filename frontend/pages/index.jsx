@@ -3,6 +3,7 @@ import HomeSection from '../components/homeSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
+import TestimonialSection from '../components/testimonialSection';
 
 const HomePage = ({ page }) => {
   if (!page) {
@@ -19,6 +20,7 @@ const HomePage = ({ page }) => {
     <div>
       <HomeSection />
       <PageBuilder pageBuilder={pageBuilder} />
+      <TestimonialSection />
     </div>
   );
 };
