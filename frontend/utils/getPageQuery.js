@@ -23,7 +23,7 @@ export default function getPageQuery(pageSlug) {
           }
         },
         buttonText,
-        buttonUrl
+        buttonLink
       },
       _type == "eventsSection" => @->{
         _type,
