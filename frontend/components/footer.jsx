@@ -56,8 +56,8 @@ const Footer = () => {
         </LinkList>
         <br />
         <LinkList>
-          <a>+44 78 0516 6798</a>
-          <a>livwelllondon@gmail.com</a>
+          <p>+44 78 0516 6798</p>
+          <Link href="mailto:livwelllondon@gmail.com">livwelllondon@gmail.com</Link>
         </LinkList>
       </LinkListContainer>
       <Logo src="/images/logo.svg" alt="logo" />

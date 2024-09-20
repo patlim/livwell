@@ -167,7 +167,7 @@ const Nav = () => {
         <BottomContainer>
           <Decal src="/images/lavender-vertical.png" alt="Lavender Decal" />
           <p>+44 78 0516 6798</p>
-          <Link href="/contact" passHref>
+          <Link href="mailto:livwelllondon@gmail.com">
             <p>livwelllondon@gmail.com</p>
           </Link>
         </BottomContainer>
