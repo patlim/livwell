@@ -8,7 +8,7 @@ const Section = styled.section`
 
 const Heading = styled.h1`
   text-align: center;
-  margin-top: -86px;
+  margin-top: -24px;
 `;
 
 const Subheading = styled.h5`
