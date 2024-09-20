@@ -31,7 +31,7 @@ export default {
       description: 'The text to display on the button'
     },
     {
-      name: 'buttonSlug',
+      name: 'buttonLink',
       title: 'Button Link',
       type: 'slug',
       description: 'For example "services" or "events" will link to pages /services, /events respectively '

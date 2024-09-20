@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
@@ -61,8 +62,7 @@ const Practitioner = ({ name, description, headshot, buttonText, buttonLink }) =
       </HeadshotContainer>
       <Info>
         <Name>{name}</Name>
-        <Description>{description}</Description>
-        <a href={buttonLink}><h5>{buttonText}</h5></a>
+        <Link to={buttonLink}><h5>{buttonText}</h5></Link>
       </Info>
     </PractitionerSection>
   );
