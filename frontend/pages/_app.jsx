@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from 'framer-motion';
 import useScrollFade from '../state/hooks/useScrollFade';
 import Footer from "../components/footer";
 import Nav from '../components/nav';
-import Bee from '../components/bee';
 import { useRouter } from 'next/router';
 
 export const averia = Averia_Serif_Libre({
@@ -19,8 +18,6 @@ export const montserrat = Montserrat({
   variable: "--font-montserrat",
   weight: ['400', '700'],
 });
-
-const numBees = 3;
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -40,9 +37,6 @@ export default function App({ Component, pageProps }) {
         </motion.div>
       </AnimatePresence>
       <Footer />
-      {[...Array(numBees)].map((_, index) => (
-        <Bee key={index} />
-      ))}
     </main>
   )
 }

@@ -30,7 +30,7 @@ const TestimonialSection = ({ testimonials }) => {
         modules={[Navigation]}
         navigation
       >
-        {testimonials.map(({testimonialText, authorName, authorDescription}, index) => (
+        {testimonials && testimonials.map(({testimonialText, authorName, authorDescription}, index) => (
           <SwiperSlide key={index}>
             <Testimonial>
               <h4>"{testimonialText}"</h4>

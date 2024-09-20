@@ -1,14 +1,32 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import TextSection from './textSection';
 import Practitioner from './practitionerSection';
 import EventsSection from './eventsSection';
 import Cta from './cta';
 import PricingSection from './pricingSection';
 import TestimonialSection from './testimonialSection';
+import styled from 'styled-components';
+import Bee from './bee';
+
+const PageBuilderContainer = styled.div`
+  position: relative;
+`
 
 const PageBuilder = ({ pageBuilder }) => {
+  const containerRef = useRef(null);
+  const [containerSize, setContainerSize] = useState({ width: 0, height: 0 });
+  const [numberOfBees,setNumberOfBees] = useState(0);
+
+  useEffect(() => {
+    if (containerRef.current) {
+      const { offsetWidth, offsetHeight } = containerRef.current;
+      setNumberOfBees(Math.floor(offsetHeight / (1.5 * window.innerHeight)));
+      setContainerSize({ width: offsetWidth, height: offsetHeight });
+    }
+  }, []);
+
   return (
-    <div>
+    <PageBuilderContainer ref={containerRef}>
       {pageBuilder.map((block, index) => {
         if (block._type === 'textSection') {
           return (
@@ -62,7 +80,10 @@ const PageBuilder = ({ pageBuilder }) => {
         return null;
       })}
       <Cta />
-    </div>
+      {[...Array(numberOfBees)].map((_, index) => (
+        <Bee key={index} containerSize={containerSize} />
+      ))}
+    </PageBuilderContainer>
   );
 };
 

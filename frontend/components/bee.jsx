@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import debounce from '../utils/debounce';
-import { useRouter } from 'next/router';
 
 const BeeImage = styled.img.attrs((props) => ({
   style: {
@@ -14,11 +13,10 @@ const BeeImage = styled.img.attrs((props) => ({
   width: 25px;
 `;
 
-const Bee = () => {
+const Bee = ({ containerSize }) => {
   const [position, setPosition] = useState({ top: 0, left: 0 });
   const [beeImage, setBeeImage] = useState('');
   const [scrollY, setScrollY] = useState(0);
-  const router = useRouter();
 
   const beeImages = [
     '/images/bee.svg',
@@ -28,11 +26,9 @@ const Bee = () => {
   ];
 
   const getRandomPosition = () => {
-    const pageHeight = document.documentElement.scrollHeight;
-    const pageWidth = window.innerWidth;
-
-    const randomTop = Math.floor(Math.random() * pageHeight);
-    const randomLeft = Math.floor(Math.random() * pageWidth);
+    if (!containerSize || containerSize.width === 0 || containerSize.height === 0) return;
+    const randomTop = Math.floor(Math.random() * containerSize.height);
+    const randomLeft = Math.floor(Math.random() * containerSize.width);
     setPosition({ top: randomTop, left: randomLeft });
   };
 
@@ -45,28 +41,15 @@ const Bee = () => {
     setScrollY(window.scrollY);
   };
 
-  const handleResize = debounce(() => {
-    getRandomPosition();
-  }, 500);
-
   useEffect(() => {
     getRandomPosition();
     getRandomBeeImage();
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
-
-    const handleRouteChange = () => {
-      getRandomPosition();
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleResize);
-      router.events.off('routeChangeComplete', handleRouteChange);
     };
-  }, [router.events]);
+  }, [containerSize]);
 
   return (
     <BeeImage
