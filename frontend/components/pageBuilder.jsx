@@ -47,7 +47,7 @@ const PageBuilder = ({ pageBuilder }) => {
               description={block.description}
               headshot={block.headshot.asset.url}
               buttonText={block.buttonText}
-              buttonUrl={block.buttonUrl}
+              buttonLink={block.buttonLink}
             />
           );
         }
