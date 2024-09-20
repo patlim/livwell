@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import debounce from '../utils/debounce';
 
 const BeeImage = styled.img.attrs((props) => ({
   style: {

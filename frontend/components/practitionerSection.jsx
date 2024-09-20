@@ -62,7 +62,8 @@ const Practitioner = ({ name, description, headshot, buttonText, buttonLink }) =
       </HeadshotContainer>
       <Info>
         <Name>{name}</Name>
-        <Link to={buttonLink}><h5>{buttonText}</h5></Link>
+        <Description>{description}</Description>
+        {buttonText && buttonLink && <Link href={buttonLink.current}><h5>{buttonText}</h5></Link>}
       </Info>
     </PractitionerSection>
   );
