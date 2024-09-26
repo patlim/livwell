@@ -16,7 +16,7 @@ const SubHeadingContainer = styled.div`
   display: flex;
   justify-content: space-between;
   width: 100%;
-  max-width: 960px;
+  max-width: 980px;
   margin: 24px auto;
   h2 {
     font-family: var(--font-montserrat);
@@ -34,9 +34,9 @@ const Home = () => {
       <Sun />
       <Logo src="/images/logo.svg" alt="logo" />
       <SubHeadingContainer>
+        <h2>Massage</h2>
         <h2>Reiki</h2>
         <h2>Mindfulness</h2>
-        <h2>Massage</h2>
       </SubHeadingContainer>
     </Section>
   );
