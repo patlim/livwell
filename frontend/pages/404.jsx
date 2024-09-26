@@ -1,9 +1,9 @@
 import Title from "../components/titleSection";
 
-const ErrorPage = () => {
+const NotFound = ({ error }) => {
   return (
     <Title title={"404"} subheading="We couldn't find that page"/>
   );
 }
  
-export default ErrorPage;
+export default NotFound;
