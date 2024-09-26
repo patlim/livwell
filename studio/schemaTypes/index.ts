@@ -3,7 +3,7 @@ import page from './page'
 import heroSection from './heroSection'
 import textSection from './textSection'
 import practitionerSection from './practitionerSection'
-import event from './event'
+import eventItem from './eventItem'
 import eventsSection from './eventsSection'
 import contactSubmission from './contactSubmission'
 import priceItem from './priceItem'
@@ -17,11 +17,11 @@ export const schemaTypes = [
   heroSection,
   textSection,
   practitionerSection,
-  event,
   eventsSection,
-  contactSubmission,
-  priceItem,
+  eventItem,
   pricingSection,
+  priceItem,
   testimonialSection,
   testimonialItem,
+  contactSubmission,
 ]
