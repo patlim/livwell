@@ -31,6 +31,12 @@ const BodyContainer = styled.div`
   ul {
     text-align: left;
     margin: 0 64px 1.5rem 64px;
+    list-style: none;
+    li:before {
+      content: '\2013';
+      position: absolute;
+      margin-left: -15px;
+    }
     @media screen and (max-width: 768px) {
       margin: 0 12px 1.5rem 12px;
     }
@@ -44,7 +50,7 @@ const Heading = styled.h2`
 
 const TextSection = ({ heading, showHeading, alignment = 'center', body }) => {
   return (
-    <section>
+    <section id={heading}>
       {heading && showHeading && <Heading data-scroll-fade className='h3' $alignment={alignment}>{heading}</Heading>}
       <BodyContainer $alignment={alignment}>
         <PortableText value={body} components={customComponents} />
