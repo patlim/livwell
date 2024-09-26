@@ -10,7 +10,7 @@ export default async function handler(req, res) {
         email,
         message,
       });
-      res.status(200).json({ message: "Form submission saved to Sanity" });
+      res.status(200).json({ message: "Form submission submitted successfully" });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
