@@ -13,7 +13,7 @@ export default {
       name: 'events',
       title: 'Events',
       type: 'array',
-      of: [{ type: 'reference', to: { type: 'event' } }],
+      of: [{ type: 'reference', to: { type: 'eventItem' } }],
       description: 'A list of events in this section',
     },
   ],
