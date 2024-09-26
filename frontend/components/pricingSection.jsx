@@ -22,7 +22,7 @@ const PriceItem = styled.li`
   align-items: center;
 `;
 
-const PricingSection = ({ heading, subheading, prices }) => {
+const PricingSection = ({ heading, subheading, prices, additionalInformation }) => {
   return (
     <PricingContainer>
       <h2>{heading}</h2>
@@ -35,6 +35,7 @@ const PricingSection = ({ heading, subheading, prices }) => {
           </PriceItem>
         ))}
       </PriceList>
+      {additionalInformation && <p className="h5">{additionalInformation}</p>}
     </PricingContainer>
   );
 };

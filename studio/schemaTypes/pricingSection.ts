@@ -22,5 +22,11 @@ export default {
       of: [{ type: 'priceItem' }],
       description: 'List of pricing items',
     },
+    {
+      name: 'additionalInformation',
+      title: 'Additional Information',
+      type: 'string',
+      description: 'Additional info shown under prices',
+    },
   ],
 }

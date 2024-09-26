@@ -46,7 +46,8 @@ export default function getPageQuery(pageSlug) {
         prices[]{
           duration,
           price
-        }
+        },
+        additionalInformation
       },
       _type == "testimonialSection" => @->{
         _type,

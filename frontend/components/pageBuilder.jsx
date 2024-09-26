@@ -66,6 +66,7 @@ const PageBuilder = ({ pageBuilder }) => {
               heading={block.heading}
               subheading={block.subheading}
               prices={block.prices}
+              additionalInformation={block.additionalInformation}
             />
           );
         }
