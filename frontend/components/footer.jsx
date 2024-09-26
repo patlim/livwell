@@ -56,6 +56,7 @@ const Footer = () => {
           <Link href='about' passHref>About</Link>
           <Link href='services' passHref>Services</Link>
           <Link href='events' passHref>Events</Link>
+          <Link href='about#FAQs' scroll={false} passHref>FAQs</Link>
           <Link href='contact' passHref>Contact</Link>
         </LinkList>
         <br />

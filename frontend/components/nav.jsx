@@ -149,6 +149,7 @@ const Nav = () => {
             <Link href="/about" passHref>About</Link>
             <Link href="/services" passHref>Services</Link>
             <Link href="/events" passHref>Events</Link>
+            <Link href='/about#FAQs' scroll={false} passHref>FAQs</Link>
             <Link href="/contact" passHref>Contact</Link>
           </LinkContainer>
           <Hamburger src="/images/menu.svg" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
@@ -163,6 +164,7 @@ const Nav = () => {
         <Link href="/about" passHref onClick={() => setIsMobileMenuOpen(false)}>About</Link>
         <Link href="/services" passHref onClick={() => setIsMobileMenuOpen(false)}>Services</Link>
         <Link href="/events" passHref onClick={() => setIsMobileMenuOpen(false)}>Events</Link>
+        <Link href='about#FAQs' scroll={false} passHref onClick={() => setIsMobileMenuOpen(false)}>FAQs</Link>
         <Link href="/contact" passHref onClick={() => setIsMobileMenuOpen(false)}>Contact</Link>
         <BottomContainer>
           <Decal src="/images/lavender-vertical.png" alt="Lavender Decal" />

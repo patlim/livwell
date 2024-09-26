@@ -5,6 +5,7 @@ import useScrollFade from '../state/hooks/useScrollFade';
 import Footer from "../components/footer";
 import Nav from '../components/nav';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 export const averia = Averia_Serif_Libre({
   subsets: ['latin'],
@@ -22,6 +23,23 @@ export const montserrat = Montserrat({
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   useScrollFade();
+
+  useEffect(() => {
+    if (router.asPath.includes('#')) {
+      const id = router.asPath.split('#')[1];
+
+      setTimeout(() => {
+        const element = document.getElementById(id);
+        if (element) {
+          const yOffset = -100;
+          const y = element.getBoundingClientRect().top + window.scrollY + yOffset;
+          window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+      }, 1000);
+    }
+  }, [router]);
+
+
   return (
     <main className={`${averia.variable} ${montserrat.variable}`}>
       <Nav />
