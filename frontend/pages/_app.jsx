@@ -6,6 +6,10 @@ import Footer from "../components/footer";
 import Nav from '../components/nav';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+ 
+export const metadata = {
+  description: 'Reclaim your calm',
+};
 
 export const averia = Averia_Serif_Libre({
   subsets: ['latin'],
@@ -38,7 +42,6 @@ export default function App({ Component, pageProps }) {
       }, 1000);
     }
   }, [router]);
-
 
   return (
     <main className={`${averia.variable} ${montserrat.variable}`}>
