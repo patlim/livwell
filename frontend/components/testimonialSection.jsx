@@ -17,7 +17,7 @@ const Testimonial = styled.div`
   padding: 64px;
   text-align: center;
   h4 {
-    margin-bottom: 14px;
+    margin-top: 14px;
   }
 `
 const TestimonialSection = ({ testimonials }) => {
@@ -33,8 +33,8 @@ const TestimonialSection = ({ testimonials }) => {
         {testimonials && testimonials.map(({testimonialText, authorName, authorDescription}, index) => (
           <SwiperSlide key={index}>
             <Testimonial>
-              <h4>"{testimonialText}"</h4>
-              <h5>{authorName}</h5>
+              <h5>"{testimonialText}"</h5>
+              <h4>{authorName}</h4>
               <p>{authorDescription}</p>
             </Testimonial>
           </SwiperSlide>
