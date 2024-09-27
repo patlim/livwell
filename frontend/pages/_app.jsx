@@ -6,10 +6,7 @@ import Footer from "../components/footer";
 import Nav from '../components/nav';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
- 
-export const metadata = {
-  description: 'Reclaim your calm',
-};
+import Head from 'next/head';
 
 export const averia = Averia_Serif_Libre({
   subsets: ['latin'],
@@ -44,20 +41,25 @@ export default function App({ Component, pageProps }) {
   }, [router]);
 
   return (
-    <main className={`${averia.variable} ${montserrat.variable}`}>
-      <Nav />
-      <AnimatePresence initial={false} mode="wait">
-        <motion.div
-          key={router.asPath}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <Component {...pageProps} />
-        </motion.div>
-      </AnimatePresence>
-      <Footer />
-    </main>
+    <>
+      <Head>
+        <meta name="description" content="Reclaim your calm" />
+      </Head>
+      <main className={`${averia.variable} ${montserrat.variable}`}>
+        <Nav />
+        <AnimatePresence initial={false} mode="wait">
+          <motion.div
+            key={router.asPath}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.5 }}
+          >
+            <Component {...pageProps} />
+          </motion.div>
+        </AnimatePresence>
+        <Footer />
+      </main>
+    </>
   )
 }
