@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
 const ContactSection = styled.section`
   display: flex;
@@ -38,7 +38,7 @@ const Label = styled.label`
 
 const Input = styled.input`
   width: 100%;
-
+  
   &:focus + ${Label}, &:not(:placeholder-shown) + ${Label} {
     top: 0;
     padding: 0 5px;
@@ -57,12 +57,29 @@ const TextArea = styled.textarea`
   }
 `;
 
-const SubmitButton = styled.button`
-  margin-left: auto;
-`;
-
 const FormResponse = styled.p`
   text-align: right;
+`;
+
+const SubmitContainer = styled.div`
+  margin: 0 20px 0 auto;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+`
+
+const spin = keyframes`
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+`;
+
+const LoadingSpinner = styled.div`
+  border: 2px solid var(--dark);
+  border-top: 2px solid var(--accent);
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  animation: ${spin} 1s linear infinite;
 `;
 
 const Contact = () => {
@@ -71,8 +88,8 @@ const Contact = () => {
     email: '',
     message: ''
   });
-
   const [responseMessage, setResponseMessage] = useState('');
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     document.title = 'Livwell | Contact';
@@ -80,6 +97,8 @@ const Contact = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setResponseMessage('');
     const response = await fetch('/api/contact', {
       method: 'POST',
       headers: {
@@ -93,7 +112,8 @@ const Contact = () => {
     } else {
       setResponseMessage('Unable to send the message, please try again later.');
     }
-    
+
+    setLoading(false); // Stop the loading animation
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -145,7 +165,10 @@ const Contact = () => {
           />
           <Label htmlFor="message">Message</Label>
         </FormField>
-        <SubmitButton type="submit">Submit</SubmitButton>
+        <SubmitContainer>
+          {loading && <LoadingSpinner />}
+          <button type="submit">Submit</button>
+        </SubmitContainer>
         {responseMessage && <FormResponse>{responseMessage}</FormResponse>}
       </ContactForm>
     </ContactSection>
