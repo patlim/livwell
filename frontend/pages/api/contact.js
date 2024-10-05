@@ -1,12 +1,7 @@
 import client from "../../client";
-import { MailerSend, EmailParams, Sender, Recipient } from "mailersend";
+import sgMail from '@sendgrid/mail';
 
-const mailerSend = new MailerSend({
-  apiKey: process.env.MAILERSEND_API_KEY,
-});
-
-const sentFrom = new Sender("livwelllondon@gmail.com", "Robot Livwell");
-const recipients = [new Recipient("livwelllondon@gmail.com", "Olivia")];
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
 
 export default async function handler(req, res) {
   if (req.method === "POST") {
@@ -20,15 +15,15 @@ export default async function handler(req, res) {
         message,
       });
 
-      const emailParams = new EmailParams()
-        .setFrom(sentFrom)
-        .setTo(recipients)
-        .setReplyTo(sentFrom)
-        .setSubject(`New Contact Form Submission from ${name}`)
-        .setHtml(`<p>You received a new message from <strong>${name}</strong> (${email}):</p><p>${message}</p>`)
-        .setText(`You received a new message from ${name} (${email}):\n\n${message}`);
+      const msg = {
+        to: 'livwelllondon@gmail.com',
+        from: 'impatlim@gmail.com',
+        subject: `New Contact Form Submission from ${name}`,
+        text: `You received a new message from ${name} (${email}):\n\n${message}`,
+        html: `<p>You received a new message from <strong>${name}</strong> (${email}):</p><p>${message}</p>`,
+      };
 
-      await mailerSend.email.send(emailParams);
+      await sgMail.send(msg);
 
       return res.status(200).json({ message: "Form submission saved to Sanity and email sent" });
 
