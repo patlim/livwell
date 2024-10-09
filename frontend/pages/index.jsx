@@ -4,7 +4,9 @@ import PageBuilder from '../components/pageBuilder';
 import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
 import TestimonialSection from '../components/testimonialSection';
+import Head from 'next/head';
 
+const pageTitle = 'Livwell | Home';
 const HomePage = ({ page }) => {
   if (!page) {
     return <div>Loading...</div>;
@@ -13,15 +15,21 @@ const HomePage = ({ page }) => {
   const { pageBuilder } = page;
 
   useEffect(() => {
-    document.title = 'Livwell | Home';
+    document.title = pageTitle;
   }, []);
 
   return (
-    <div>
-      <HomeSection />
-      <PageBuilder pageBuilder={pageBuilder} />
-      <TestimonialSection />
-    </div>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} key="title" />
+      </Head>
+      <div>
+        <HomeSection />
+        <PageBuilder pageBuilder={pageBuilder} />
+        <TestimonialSection />
+      </div>
+    </>
   );
 };
 

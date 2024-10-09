@@ -43,7 +43,11 @@ export default function App({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <meta name="description" content="Reclaim your calm" />
+        <meta
+          name="description"
+          content={`Reclaim your calm\nSlow down, take a breath and reconnect your body and mind.`}
+          key="desc"
+        />
       </Head>
       <main className={`${averia.variable} ${montserrat.variable}`}>
         <Nav />

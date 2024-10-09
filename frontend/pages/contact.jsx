@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import Head from 'next/head';
 
 const ContactSection = styled.section`
   display: flex;
@@ -82,6 +83,8 @@ const LoadingSpinner = styled.div`
   animation: ${spin} 1s linear infinite;
 `;
 
+const pageTitle = 'Livwell | Contact'
+
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
@@ -92,7 +95,7 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = 'Livwell | Contact';
+    document.title = pageTitle;
   }, []);
 
   const handleSubmit = async (e) => {
@@ -125,53 +128,59 @@ const Contact = () => {
   };
 
   return (
-    <ContactSection>
-      <h1 className='h3'>Contact</h1>
-      <ContactForm onSubmit={handleSubmit}>
-        <FormField>
-          <Input
-            type="text"
-            id="name"
-            name="name"
-            placeholder=" "
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-          <Label htmlFor="name">Name</Label>
-        </FormField>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} key="title" />
+      </Head>
+      <ContactSection>
+        <h1 className='h3'>Contact</h1>
+        <ContactForm onSubmit={handleSubmit}>
+          <FormField>
+            <Input
+              type="text"
+              id="name"
+              name="name"
+              placeholder=" "
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+            <Label htmlFor="name">Name</Label>
+          </FormField>
 
-        <FormField>
-          <Input
-            type="email"
-            id="email"
-            name="email"
-            placeholder=" "
-            value={formData.email}
-            onChange={handleChange}
-            required
-          />
-          <Label htmlFor="email">Email</Label>
-        </FormField>
+          <FormField>
+            <Input
+              type="email"
+              id="email"
+              name="email"
+              placeholder=" "
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+            <Label htmlFor="email">Email</Label>
+          </FormField>
 
-        <FormField>
-          <TextArea
-            id="message"
-            name="message"
-            placeholder=" "
-            value={formData.message}
-            onChange={handleChange}
-            required
-          />
-          <Label htmlFor="message">Message</Label>
-        </FormField>
-        <SubmitContainer>
-          {loading && <LoadingSpinner />}
-          <button type="submit">Submit</button>
-        </SubmitContainer>
-        {responseMessage && <FormResponse>{responseMessage}</FormResponse>}
-      </ContactForm>
-    </ContactSection>
+          <FormField>
+            <TextArea
+              id="message"
+              name="message"
+              placeholder=" "
+              value={formData.message}
+              onChange={handleChange}
+              required
+            />
+            <Label htmlFor="message">Message</Label>
+          </FormField>
+          <SubmitContainer>
+            {loading && <LoadingSpinner />}
+            <button type="submit">Submit</button>
+          </SubmitContainer>
+          {responseMessage && <FormResponse>{responseMessage}</FormResponse>}
+        </ContactForm>
+      </ContactSection>
+    </>
   );
 };
 

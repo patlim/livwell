@@ -3,7 +3,9 @@ import TitleSection from '../components/titleSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
+import Head from 'next/head';
 
+const pageTitle = 'Livwell | Our services';
 const ServicesPage = ({ page }) => {
   if (!page) {
     return <div>Loading...</div>;
@@ -12,14 +14,20 @@ const ServicesPage = ({ page }) => {
   const { title, pageBuilder } = page;
 
   useEffect(() => {
-    document.title = 'Livwell | Our services';
+    document.title = pageTitle;
   }, []);
 
   return (
-    <div>
-      <TitleSection heading={title} />
-      <PageBuilder pageBuilder={pageBuilder} />
-    </div>
+    <>
+      <Head>
+        <title>{pageTitle}</title>
+        <meta property="og:title" content={pageTitle} key="title" />
+      </Head>
+      <div>
+        <TitleSection heading={title} />
+        <PageBuilder pageBuilder={pageBuilder} />
+      </div>
+    </>
   );
 };
 
