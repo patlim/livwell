@@ -152,7 +152,7 @@ const Nav = () => {
             <Link href='/about#FAQs' scroll={false} passHref>FAQs</Link>
             <Link href="/contact" passHref>Contact</Link>
           </LinkContainer>
-          <Hamburger src="/images/menu.svg" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
+          <Hamburger src="/images/menu.svg" alt="menu" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} />
         </NavContent>
       </NavContainer>
 
