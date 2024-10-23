@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { useForm } from '@formspree/react';
 import Head from 'next/head';
-import client from '../client';
 
 const ContactSection = styled.section`
   display: flex;
@@ -107,12 +106,16 @@ const Contact = () => {
     setResponseMessage('');
 
     try {
-      await client.create({
-        _type: "contactSubmission",
-        ...formData
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
       });
+  
       handleFormSpreeSubmit()
-      if (state.succes) {
+      if (state.succes && response.ok) {
         setResponseMessage('Message sent');
       } else {
         setResponseMessage('Unable to send the message, please try again later.');
