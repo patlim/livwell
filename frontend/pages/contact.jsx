@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useForm } from '@formspree/react';
+import { useForm, ValidationError } from '@formspree/react';
 import Head from 'next/head';
 
 const ContactSection = styled.section`
@@ -22,6 +22,10 @@ const ContactForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 12px;
+  .validation-error {
+    font-family: var(--font-montserrat);
+    text-align: end;
+  }
 `;
 
 const FormField = styled.div`
@@ -97,8 +101,15 @@ const Contact = () => {
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    document.title = pageTitle;
-  }, []);
+    if (state.succeeded) {
+      setResponseMessage('Message sent successfully.');
+      setLoading(false);
+      setFormData({ name: '', email: '', message: '' });
+    } else if (state.errors && state.errors.length > 0) {
+      setResponseMessage('Unable to send the message. Please try again later.');
+      setLoading(false);
+    }
+  }, [state.succeeded, state.errors]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -106,27 +117,23 @@ const Contact = () => {
     setResponseMessage('');
 
     try {
-      debugger
-      const response = await fetch('/api/contact', {
+      await handleFormSpreeSubmit(e);
+
+      const apiResponse = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(formData),
       });
-  
-      handleFormSpreeSubmit()
-      if (state.succes && response.ok) {
-        setResponseMessage('Message sent');
-      } else {
-        setResponseMessage('Unable to send the message, please try again later.');
-      }
-    } catch (e) {
-      setResponseMessage('Unable to send the message, please try again later.');
-    };
 
-    setLoading(false);
-    setFormData({ name: '', email: '', message: '' });
+      if (!apiResponse.ok) {
+        setResponseMessage('Unable to send the message. Please try again later.');
+      }
+    } catch (error) {
+      setResponseMessage('Unable to send the message. Please try again later.');
+      setLoading(false);
+    }
   };
 
   const handleChange = (e) => {
@@ -170,7 +177,6 @@ const Contact = () => {
             />
             <Label htmlFor="email">Email</Label>
           </FormField>
-
           <FormField>
             <TextArea
               id="message"
@@ -186,6 +192,12 @@ const Contact = () => {
             {loading && <LoadingSpinner />}
             <button type="submit">Submit</button>
           </SubmitContainer>
+          <ValidationError
+            className='validation-error'
+            prefix="Email" 
+            field="email"
+            errors={state.errors}
+          />
           {responseMessage && <FormResponse>{responseMessage}</FormResponse>}
         </ContactForm>
       </ContactSection>
