@@ -103,12 +103,9 @@ const Contact = () => {
   useEffect(() => {
     if (state.succeeded) {
       setResponseMessage('Message sent successfully.');
-      setLoading(false);
       setFormData({ name: '', email: '', message: '' });
-    } else if (state.errors && state.errors.length > 0) {
-      setResponseMessage('Unable to send the message. Please try again later.');
-      setLoading(false);
     }
+    setLoading(false);
   }, [state.succeeded, state.errors]);
 
   const handleSubmit = async (e) => {
