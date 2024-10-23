@@ -106,6 +106,7 @@ const Contact = () => {
     setResponseMessage('');
 
     try {
+      debugger
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
