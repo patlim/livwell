@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
-import { useForm, ValidationError } from '@formspree/react';
+import { useForm } from '@formspree/react';
 import Head from 'next/head';
 import client from '../client';
 
