@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { useForm, ValidationError } from '@formspree/react';
 import Head from 'next/head';
+import client from '../client';
 
 const ContactSection = styled.section`
   display: flex;
@@ -86,6 +88,7 @@ const LoadingSpinner = styled.div`
 const pageTitle = 'Livwell | Contact'
 
 const Contact = () => {
+  const [state, handleFormSpreeSubmit] = useForm("xrbgbopz");
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -102,21 +105,23 @@ const Contact = () => {
     e.preventDefault();
     setLoading(true);
     setResponseMessage('');
-    const response = await fetch('/api/contact', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
 
-    if (response.ok) {
-      setResponseMessage('Message sent');
-    } else {
+    try {
+      await client.create({
+        _type: "contactSubmission",
+        ...formData
+      });
+      handleFormSpreeSubmit()
+      if (state.succes) {
+        setResponseMessage('Message sent');
+      } else {
+        setResponseMessage('Unable to send the message, please try again later.');
+      }
+    } catch (e) {
       setResponseMessage('Unable to send the message, please try again later.');
-    }
+    };
 
-    setLoading(false); // Stop the loading animation
+    setLoading(false);
     setFormData({ name: '', email: '', message: '' });
   };
 
