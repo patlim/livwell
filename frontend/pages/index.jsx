@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'; 
 import HomeSection from '../components/homeSection';
 import PageBuilder from '../components/pageBuilder';
 import client from '../client';
