@@ -5,6 +5,7 @@ import client from '../client';
 import getPageQuery from '../utils/getPageQuery';
 import TestimonialSection from '../components/testimonialSection';
 import Head from 'next/head';
+import { PlimAscii } from '../components/PlimAscii';
 
 const pageTitle = 'Livwell | Home';
 const HomePage = ({ page }) => {
@@ -25,6 +26,7 @@ const HomePage = ({ page }) => {
         <meta property="og:title" content={pageTitle} key="title" />
       </Head>
       <div>
+        <PlimAscii />
         <HomeSection />
         <PageBuilder pageBuilder={pageBuilder} />
         <TestimonialSection />
