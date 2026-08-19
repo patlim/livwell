@@ -1,6 +1,10 @@
 {
   "name": "livwell",
   "version": "0.1.0",
+  "engines": {
+    "node": ">=24.0.0",
+    "npm": ">=11.0.0"
+  },
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -23,7 +27,7 @@
     "swiper": "^11.1.14"
   },
   "devDependencies": {
-    "@types/node": "^20",
+    "@types/node": "^24",
     "@types/react": "^18",
     "@types/react-dom": "^18",
     "typescript": "^5"
