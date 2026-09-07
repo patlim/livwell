@@ -20,6 +20,10 @@ const customComponents = {
 };
 
 const BodyContainer = styled.div`
+  min-height: ${(props) => (props.$fullScreen ? '100vh' : 'auto')};
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   text-align: ${(props) => props.$alignment || 'center'};
 `;
 
@@ -28,11 +32,11 @@ const Heading = styled.h2`
   margin-bottom: 1rem;
 `;
 
-const TextSection = ({ heading, showHeading, alignment = 'center', body }) => {
+const TextSection = ({ heading, showHeading, alignment = 'center', body, fullScreen }) => {
   return (
     <section id={heading}>
       {heading && showHeading && <Heading data-scroll-fade className='h3' $alignment={alignment}>{heading}</Heading>}
-      <BodyContainer className='portable-text-container' $alignment={alignment}>
+      <BodyContainer className='portable-text-container' $alignment={alignment} $fullScreen={fullScreen}>
         <PortableText value={body} components={customComponents} />
       </BodyContainer>
     </section>

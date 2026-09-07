@@ -5,6 +5,7 @@
   --foreground: #CABB94;
   --accent: #EABB4D;
   --dark: #272E16;
+  --swiper-navigation-size: 40px !important;
 }
 
 html,
@@ -123,7 +124,19 @@ section {
 }
 
 
-
+.swiper-wrapper {
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none;
+  }
+}
+.swiper-button-prev,
+.swiper-button-next {
+width: auto;
+}
 .swiper-button-prev {
   background-image: url("/images/left-arrow.svg") !important;
   background-position: center;

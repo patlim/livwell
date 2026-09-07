@@ -19,15 +19,21 @@ export default defineType({
       },
     }),
     defineField({
-      name: 'showHeading',
+      name: 'fullScreen',
       type: 'boolean',
-      title: 'Show heading',
-      initialValue: true,
+      title: 'Full screen',
+      initialValue: false,
     }),
     defineField({
       name: 'body',
       title: 'Body',
       type: 'blockContent',
+    }),
+    defineField({
+      name: 'showHeading',
+      type: 'boolean',
+      title: 'Show heading',
+      initialValue: true,
     }),
   ],
 })

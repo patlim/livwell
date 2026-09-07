@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import TextSection from './textSection';
 import Practitioner from './practitionerSection';
 import EventsSection from './eventsSection';
@@ -36,6 +36,7 @@ const PageBuilder = ({ pageBuilder }) => {
               showHeading={block.showHeading}
               body={block.body}
               alignment={block.alignment}
+              fullScreen={block.fullScreen}
             />
           );
         }

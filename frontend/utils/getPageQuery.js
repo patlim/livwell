@@ -11,7 +11,8 @@ export default function getPageQuery(pageSlug) {
         heading,
         showHeading,
         alignment,
-        body
+        body,
+        fullScreen,
       },
       _type == "practitionerSection" => @->{
         _type,

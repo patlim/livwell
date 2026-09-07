@@ -5,30 +5,40 @@ import { Navigation } from 'swiper/modules';
 import styled from 'styled-components';
 
 const TestimonialsContainer = styled.section`
-  max-width: 800px;
+  padding: 0;
 `
 const Testimonial = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  margin: 0 auto;
-  max-width: 650px;
-  padding: 64px;
+  padding: 24px;
+  border-radius: 12px;
   text-align: center;
+  background-color: #272E16;
   h4 {
-    margin-top: 14px;
+    margin-top: 24px;
   }
 `
 const TestimonialSection = ({ testimonials }) => {
   return (
     <TestimonialsContainer>
       <Swiper
-        spaceBetween={50}
-        slidesPerView={1}
+        spaceBetween={24}
+        slidesPerView={1.2}
+        centeredSlides={true}
         autoplay={{ delay: 3000 }}
         modules={[Navigation]}
         navigation
+        breakpoints={{
+          '768': {
+            slidesPerView: 1.8,
+          },
+          '1200': {
+            slidesPerView: 2,
+            spaceBetween: 128,
+          }
+        }}
       >
         {testimonials && testimonials.map(({testimonialText, authorName, authorDescription}, index) => (
           <SwiperSlide key={index}>
