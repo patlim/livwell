@@ -52,13 +52,13 @@ const Footer = () => {
     <FooterContainer>
       <Decal src="/images/lavender.png" alt="lav" />
       <LinkListContainer>
-        <LinkList>
+        {/* <LinkList>
           <Link href='about' passHref>About</Link>
           <Link href='services' passHref>Services</Link>
           <Link href='events' passHref>Events</Link>
           <Link href='about#FAQs' scroll={false} passHref>FAQs</Link>
           <Link href='contact' passHref>Contact</Link>
-        </LinkList>
+        </LinkList> */}
         <br />
         <LinkList>
           <p>+44 78 0516 6798</p>
